@@ -29,9 +29,11 @@ api.prefix = '/api'
 
 from endpoints.users.resource import UsersResource
 from endpoints.todos.resource import TodosResource
+from endpoints.cure.resource import CuredbResource
 
 api.add_resource(UsersResource, '/users', '/users/<int:user_id>')
 api.add_resource(TodosResource, '/todos', '/todos/<int:todo_id>')
+api.add_resource(CuredbResource, '/cures', '/cures/<int:cure_id>')
 
 if __name__ == '__main__':
     app.run()
