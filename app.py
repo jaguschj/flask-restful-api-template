@@ -37,11 +37,15 @@ api.prefix = '/api'
 
 from endpoints.users.resource import UsersResource
 from endpoints.todos.resource import TodosResource
-from endpoints.cure.resource import CuredbResource
+from endpoints.bu.resource    import BUResource
+from endpoints.comp.resource  import CompoundResource
+from endpoints.cure.resource  import CuredbResource
 
 
 api.add_resource(UsersResource, '/users', '/users/<int:user_id>')
 api.add_resource(TodosResource, '/todos', '/todos/<int:todo_id>')
+api.add_resource(CompoundResource, '/compounds', '/compounds/<int:comp_id>')
+api.add_resource(BUResource, '/bu', '/bu/<int:bu_id>')
 api.add_resource(CuredbResource, '/cures', '/cures/<int:cure_id>')
 
 if __name__ == '__main__':

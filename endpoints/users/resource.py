@@ -6,9 +6,9 @@ from app import db
 user_fields = {
     'id': fields.Integer,
     'name': fields.String,
-    'todos': fields.List(fields.Nested({'id': fields.Integer,
-                                        'name': fields.String,
-                                        'description': fields.String})),
+    #'todos': fields.List(fields.Nested({'id': fields.Integer,
+    #                                    'name': fields.String,
+    #                                    'description': fields.String})),
 }
 
 user_list_fields = {

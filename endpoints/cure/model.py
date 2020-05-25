@@ -13,6 +13,10 @@ class Curedb(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
                         nullable=False)
+    comp_id = db.Column(db.Integer, db.ForeignKey('compound.id'),
+                        nullable=False)
+    bu_id = db.Column(db.Integer, db.ForeignKey('bu.id'),
+                        nullable=False)
 
     def __repr__(self):
         return '<Id: {}, name: {}>'.format(self.id, self.name)

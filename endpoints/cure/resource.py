@@ -13,7 +13,9 @@ cure_fields = {
     'description': fields.String,
     'a': fields.Float,
     'b': fields.Float,
-    'user_id': fields.Integer
+    'user_id': fields.Integer,
+    'bu_id': fields.Integer,
+    'comp_id': fields.Integer
 }
 
 cure_list_fields = {
@@ -32,6 +34,10 @@ cure_post_parser.add_argument('b', type=float, required=True, location=['json'],
                               help='b parameter is required')
 cure_post_parser.add_argument('user_id', type=int, required=True, location=['json'],
                               help='user_id parameter is required')
+cure_post_parser.add_argument('bu_id', type=int, required=True, location=['json'],
+                              help='bu_id parameter is required')
+cure_post_parser.add_argument('comp_id', type=int, required=True, location=['json'],
+                              help='comp_id parameter is required')
 
 
 class CuredbResource(Resource):
@@ -65,7 +71,7 @@ class CuredbResource(Resource):
     @marshal_with(cure_fields)
     def post(self):
         args = cure_post_parser.parse_args()
-        print(args)
+        #print(args)
         #import pdb;pdb.set_trace()
         if Curedb.query.filter_by(name=args['name']).first():
             raise BadRequest(description='Name %s already exists'%(args['name']))
