@@ -1,8 +1,12 @@
 from flask_restful import Resource, reqparse, request
 from flask_restful import fields, marshal_with, marshal
+from flask_restful import abort
+from werkzeug.exceptions import BadRequest
 from .model import Curedb
 from app import db
 
+       
+        
 cure_fields = {
     'id': fields.Integer,
     'name': fields.String,
@@ -34,6 +38,7 @@ class CuredbResource(Resource):
     def get(self, cure_id=None):
         if cure_id:
             cure = Curedb.query.filter_by(id=cure_id).first()
+            #cure = Curedb.get(cure_id)
             return marshal(cure, cure_fields)
         else:
             args = request.args.to_dict()
@@ -60,7 +65,13 @@ class CuredbResource(Resource):
     @marshal_with(cure_fields)
     def post(self):
         args = cure_post_parser.parse_args()
-
+        print(args)
+        #import pdb;pdb.set_trace()
+        if Curedb.query.filter_by(name=args['name']).first():
+            raise BadRequest(description='Name %s already exists'%(args['name']))
+            #raise CuredbAlreadyExistsError
+            #return bad_request('please use a different name')
+            #abort(Response('name already exists'))
         cure = Curedb(**args)
         db.session.add(cure)
         db.session.commit()

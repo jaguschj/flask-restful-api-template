@@ -10,4 +10,4 @@ class User(db.Model):
     todos = db.relationship('Todo', backref='user', lazy='select')
 
     def __repr__(self):
-        return 'Id: {}, name: {}'.format(self.id, self.name)
+        return '<Id: {}, name: {}>'.format(self.id, self.name)
